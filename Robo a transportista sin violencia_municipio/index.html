@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1.js"></script>
+        <script src="data/Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[16.695431839366563,-104.23748694431995],[22.265329043851636,-93.08998674681538]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_Positron_0');
+        map.getPane('pane_Positron_0').style.zIndex = 400;
+        var layer_Positron_0 = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            pane: 'pane_Positron_0',
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_Positron_0;
+        map.addLayer(layer_Positron_0);
+        function pop_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Cve_geo</th>\
+                        <td>' + (feature.properties['Cve_geo'] !== null ? autolinker.link(feature.properties['Cve_geo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['Municipio'] !== null ? autolinker.link(feature.properties['Municipio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Delitos to</th>\
+                        <td>' + (feature.properties['Delitos to'] !== null ? autolinker.link(feature.properties['Delitos to'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tasa</th>\
+                        <td>' + (feature.properties['Tasa'] !== null ? autolinker.link(feature.properties['Tasa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1_0(feature) {
+            if (feature.properties['Tasa'] >= 0.000000 && feature.properties['Tasa'] <= 1.000000 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Tasa'] >= 1.000000 && feature.properties['Tasa'] <= 12.903226 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,238,81,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Tasa'] >= 12.903226 && feature.properties['Tasa'] <= 27.987685 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(142,172,80,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Tasa'] >= 27.987685 && feature.properties['Tasa'] <= 60.335465 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(23,89,74,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Tasa'] >= 60.335465 && feature.properties['Tasa'] <= 106.609808 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(33,51,99,0.8)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1');
+        map.getPane('pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1').style.zIndex = 401;
+        map.getPane('pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1').style['mix-blend-mode'] = 'normal';
+        var layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1 = new L.geoJson(json_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1',
+            layerName: 'layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1',
+            pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1',
+            onEachFeature: pop_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1,
+            style: style_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1_0,
+        });
+        bounds_group.addLayer(layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1);
+        function pop_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Cve_geo</th>\
+                        <td>' + (feature.properties['Cve_geo'] !== null ? autolinker.link(feature.properties['Cve_geo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['Municipio'] !== null ? autolinker.link(feature.properties['Municipio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Delitos to</th>\
+                        <td>' + (feature.properties['Delitos to'] !== null ? autolinker.link(feature.properties['Delitos to'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tasa</th>\
+                        <td>' + (feature.properties['Tasa'] !== null ? autolinker.link(feature.properties['Tasa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2_0(feature) {
+            if (feature.properties['Delitos to'] >= 0.000000 && feature.properties['Delitos to'] <= 1.000000 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Delitos to'] >= 1.000000 && feature.properties['Delitos to'] <= 8.000000 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,238,81,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Delitos to'] >= 8.000000 && feature.properties['Delitos to'] <= 20.000000 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(142,172,80,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Delitos to'] >= 20.000000 && feature.properties['Delitos to'] <= 43.000000 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(23,89,74,0.8)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Delitos to'] >= 43.000000 && feature.properties['Delitos to'] <= 87.000000 ) {
+                return {
+                pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(33,51,99,0.8)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2');
+        map.getPane('pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2').style.zIndex = 402;
+        map.getPane('pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2').style['mix-blend-mode'] = 'normal';
+        var layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2 = new L.geoJson(json_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2',
+            layerName: 'layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2',
+            pane: 'pane_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2',
+            onEachFeature: pop_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2,
+            style: style_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2_0,
+        });
+        bounds_group.addLayer(layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2);
+        map.addLayer(layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Robo a transportista por municipio sin violencia (total de carpetas)<br /><table><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2_010.png" /></td><td>0 - 1</td></tr><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2_181.png" /></td><td>1 - 8</td></tr><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2_8202.png" /></td><td>8 - 20</td></tr><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2_20433.png" /></td><td>20 - 43</td></tr><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2_43874.png" /></td><td>43 - 87</td></tr></table>': layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetas_2,'Robo a transportista por municipio sin violencia (total de carpetas) copiar<br /><table><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1_010.png" /></td><td>0 - 1</td></tr><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1_11291.png" /></td><td>1 - 12.9</td></tr><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1_129282.png" /></td><td>12.9 - 28</td></tr><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1_286033.png" /></td><td>28 - 60.3</td></tr><tr><td style="text-align: center;"><img src="legend/Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1_60310664.png" /></td><td>60.3 - 106.6</td></tr></table>': layer_Roboatransportistapormunicipiosinviolenciatotaldecarpetascopiar_1,"Positron": layer_Positron_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
