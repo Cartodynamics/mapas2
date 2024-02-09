@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/Carpetasporcolonia_2.js"></script>
+        <script src="data/Alcaldas_3.js"></script>
+        <script src="data/Cluster_4.js"></script>
+        <script src="data/CarpetasHomicidioDolosooctdic_5.js"></script>
+        <script src="data/CarpetasHomicidiodolosoenero_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[19.275506631879455,-99.38448507700768],[19.56137995737946,-98.85367918868825]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleRoad_0');
+        map.getPane('pane_GoogleRoad_0').style.zIndex = 400;
+        var layer_GoogleRoad_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleRoad_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleRoad_0;
+        map.createPane('pane_Positron_1');
+        map.getPane('pane_Positron_1').style.zIndex = 401;
+        var layer_Positron_1 = L.tileLayer('https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            pane: 'pane_Positron_1',
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_Positron_1;
+        map.addLayer(layer_Positron_1);
+        function pop_Carpetasporcolonia_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">CVE_alc</th>\
+                        <td>' + (feature.properties['CVE_alc'] !== null ? autolinker.link(feature.properties['CVE_alc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Alcaldía</th>\
+                        <td>' + (feature.properties['Alcaldía'] !== null ? autolinker.link(feature.properties['Alcaldía'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Cveut</th>\
+                        <td>' + (feature.properties['Cveut'] !== null ? autolinker.link(feature.properties['Cveut'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Colonia</th>\
+                        <td>' + (feature.properties['Colonia'] !== null ? autolinker.link(feature.properties['Colonia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Carpetas</th>\
+                        <td>' + (feature.properties['Carpetas'] !== null ? autolinker.link(feature.properties['Carpetas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Carpetasporcolonia_2_0(feature) {
+            if (feature.properties['Carpetas'] >= 0.000000 && feature.properties['Carpetas'] <= 0.000000 ) {
+                return {
+                pane: 'pane_Carpetasporcolonia_2',
+                opacity: 1,
+                color: 'rgba(227,227,227,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,240,0.5019607843137255)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Carpetas'] >= 0.000000 && feature.properties['Carpetas'] <= 1.000000 ) {
+                return {
+                pane: 'pane_Carpetasporcolonia_2',
+                opacity: 1,
+                color: 'rgba(227,227,227,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(252,190,165,0.5019607843137255)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Carpetas'] >= 1.000000 && feature.properties['Carpetas'] <= 2.000000 ) {
+                return {
+                pane: 'pane_Carpetasporcolonia_2',
+                opacity: 1,
+                color: 'rgba(227,227,227,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,112,80,0.5019607843137255)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Carpetas'] >= 2.000000 && feature.properties['Carpetas'] <= 3.000000 ) {
+                return {
+                pane: 'pane_Carpetasporcolonia_2',
+                opacity: 1,
+                color: 'rgba(227,227,227,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(211,32,32,0.5019607843137255)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Carpetas'] >= 3.000000 && feature.properties['Carpetas'] <= 4.000000 ) {
+                return {
+                pane: 'pane_Carpetasporcolonia_2',
+                opacity: 1,
+                color: 'rgba(227,227,227,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,0,13,0.5019607843137255)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Carpetasporcolonia_2');
+        map.getPane('pane_Carpetasporcolonia_2').style.zIndex = 402;
+        map.getPane('pane_Carpetasporcolonia_2').style['mix-blend-mode'] = 'normal';
+        var layer_Carpetasporcolonia_2 = new L.geoJson(json_Carpetasporcolonia_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Carpetasporcolonia_2',
+            layerName: 'layer_Carpetasporcolonia_2',
+            pane: 'pane_Carpetasporcolonia_2',
+            onEachFeature: pop_Carpetasporcolonia_2,
+            style: style_Carpetasporcolonia_2_0,
+        });
+        bounds_group.addLayer(layer_Carpetasporcolonia_2);
+        map.addLayer(layer_Carpetasporcolonia_2);
+        function pop_Alcaldas_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nomgeo'] !== null ? autolinker.link(feature.properties['nomgeo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cve_mun'] !== null ? autolinker.link(feature.properties['cve_mun'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['g_pnt_2'] !== null ? autolinker.link(feature.properties['g_pnt_2'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['geo_shp'] !== null ? autolinker.link(feature.properties['geo_shp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['frecuencia'] !== null ? autolinker.link(feature.properties['frecuencia'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Alcaldas_3_0() {
+            return {
+                pane: 'pane_Alcaldas_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,89,137,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_Alcaldas_3');
+        map.getPane('pane_Alcaldas_3').style.zIndex = 403;
+        map.getPane('pane_Alcaldas_3').style['mix-blend-mode'] = 'normal';
+        var layer_Alcaldas_3 = new L.geoJson(json_Alcaldas_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_Alcaldas_3',
+            layerName: 'layer_Alcaldas_3',
+            pane: 'pane_Alcaldas_3',
+            onEachFeature: pop_Alcaldas_3,
+            style: style_Alcaldas_3_0,
+        });
+        bounds_group.addLayer(layer_Alcaldas_3);
+        map.addLayer(layer_Alcaldas_3);
+        function pop_Cluster_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLUSTER_ID</th>\
+                        <td>' + (feature.properties['CLUSTER_ID'] !== null ? autolinker.link(feature.properties['CLUSTER_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">area</th>\
+                        <td>' + (feature.properties['area'] !== null ? autolinker.link(feature.properties['area'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">perimeter</th>\
+                        <td>' + (feature.properties['perimeter'] !== null ? autolinker.link(feature.properties['perimeter'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Cluster_4_0() {
+            return {
+                pane: 'pane_Cluster_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,120,180,0.7019607843137254)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Cluster_4');
+        map.getPane('pane_Cluster_4').style.zIndex = 404;
+        map.getPane('pane_Cluster_4').style['mix-blend-mode'] = 'normal';
+        var layer_Cluster_4 = new L.geoJson(json_Cluster_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Cluster_4',
+            layerName: 'layer_Cluster_4',
+            pane: 'pane_Cluster_4',
+            onEachFeature: pop_Cluster_4,
+            style: style_Cluster_4_0,
+        });
+        bounds_group.addLayer(layer_Cluster_4);
+        map.addLayer(layer_Cluster_4);
+        function pop_CarpetasHomicidioDolosooctdic_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">carpeta_investigacion</th>\
+                        <td>' + (feature.properties['carpeta_investigacion'] !== null ? autolinker.link(feature.properties['carpeta_investigacion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">fecha_inicio</th>\
+                        <td>' + (feature.properties['fecha_inicio'] !== null ? autolinker.link(feature.properties['fecha_inicio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">fecha_hechos</th>\
+                        <td>' + (feature.properties['fecha_hechos'] !== null ? autolinker.link(feature.properties['fecha_hechos'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">exordio</th>\
+                        <td>' + (feature.properties['exordio'] !== null ? autolinker.link(feature.properties['exordio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">categoria_delito</th>\
+                        <td>' + (feature.properties['categoria_delito'] !== null ? autolinker.link(feature.properties['categoria_delito'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">delito</th>\
+                        <td>' + (feature.properties['delito'] !== null ? autolinker.link(feature.properties['delito'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">geo_coordinacion</th>\
+                        <td>' + (feature.properties['geo_coordinacion'] !== null ? autolinker.link(feature.properties['geo_coordinacion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">geo_sector</th>\
+                        <td>' + (feature.properties['geo_sector'] !== null ? autolinker.link(feature.properties['geo_sector'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">fecha_actualizacion</th>\
+                        <td>' + (feature.properties['fecha_actualizacion'] !== null ? autolinker.link(feature.properties['fecha_actualizacion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLUSTER_ID</th>\
+                        <td>' + (feature.properties['CLUSTER_ID'] !== null ? autolinker.link(feature.properties['CLUSTER_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLUSTER_SIZE</th>\
+                        <td>' + (feature.properties['CLUSTER_SIZE'] !== null ? autolinker.link(feature.properties['CLUSTER_SIZE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CarpetasHomicidioDolosooctdic_5_0() {
+            return {
+                pane: 'pane_CarpetasHomicidioDolosooctdic_5',
+                radius: 5.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,116,116,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CarpetasHomicidioDolosooctdic_5');
+        map.getPane('pane_CarpetasHomicidioDolosooctdic_5').style.zIndex = 405;
+        map.getPane('pane_CarpetasHomicidioDolosooctdic_5').style['mix-blend-mode'] = 'normal';
+        var layer_CarpetasHomicidioDolosooctdic_5 = new L.geoJson(json_CarpetasHomicidioDolosooctdic_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CarpetasHomicidioDolosooctdic_5',
+            layerName: 'layer_CarpetasHomicidioDolosooctdic_5',
+            pane: 'pane_CarpetasHomicidioDolosooctdic_5',
+            onEachFeature: pop_CarpetasHomicidioDolosooctdic_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CarpetasHomicidioDolosooctdic_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CarpetasHomicidioDolosooctdic_5);
+        map.addLayer(layer_CarpetasHomicidioDolosooctdic_5);
+        function pop_CarpetasHomicidiodolosoenero_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">fid</th>\
+                        <td>' + (feature.properties['fid'] !== null ? autolinker.link(feature.properties['fid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">carpeta_investigacion</th>\
+                        <td>' + (feature.properties['carpeta_investigacion'] !== null ? autolinker.link(feature.properties['carpeta_investigacion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">fecha_inicio</th>\
+                        <td>' + (feature.properties['fecha_inicio'] !== null ? autolinker.link(feature.properties['fecha_inicio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">fecha_hechos</th>\
+                        <td>' + (feature.properties['fecha_hechos'] !== null ? autolinker.link(feature.properties['fecha_hechos'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">exordio</th>\
+                        <td>' + (feature.properties['exordio'] !== null ? autolinker.link(feature.properties['exordio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">categoria_delito</th>\
+                        <td>' + (feature.properties['categoria_delito'] !== null ? autolinker.link(feature.properties['categoria_delito'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">delito</th>\
+                        <td>' + (feature.properties['delito'] !== null ? autolinker.link(feature.properties['delito'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">geo_coordinacion</th>\
+                        <td>' + (feature.properties['geo_coordinacion'] !== null ? autolinker.link(feature.properties['geo_coordinacion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">geo_sector</th>\
+                        <td>' + (feature.properties['geo_sector'] !== null ? autolinker.link(feature.properties['geo_sector'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">fecha_actualizacion</th>\
+                        <td>' + (feature.properties['fecha_actualizacion'] !== null ? autolinker.link(feature.properties['fecha_actualizacion'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLUSTER_ID</th>\
+                        <td>' + (feature.properties['CLUSTER_ID'] !== null ? autolinker.link(feature.properties['CLUSTER_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CLUSTER_SIZE</th>\
+                        <td>' + (feature.properties['CLUSTER_SIZE'] !== null ? autolinker.link(feature.properties['CLUSTER_SIZE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CarpetasHomicidiodolosoenero_6_0() {
+            return {
+                pane: 'pane_CarpetasHomicidiodolosoenero_6',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,46,105,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CarpetasHomicidiodolosoenero_6');
+        map.getPane('pane_CarpetasHomicidiodolosoenero_6').style.zIndex = 406;
+        map.getPane('pane_CarpetasHomicidiodolosoenero_6').style['mix-blend-mode'] = 'normal';
+        var layer_CarpetasHomicidiodolosoenero_6 = new L.geoJson(json_CarpetasHomicidiodolosoenero_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CarpetasHomicidiodolosoenero_6',
+            layerName: 'layer_CarpetasHomicidiodolosoenero_6',
+            pane: 'pane_CarpetasHomicidiodolosoenero_6',
+            onEachFeature: pop_CarpetasHomicidiodolosoenero_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CarpetasHomicidiodolosoenero_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CarpetasHomicidiodolosoenero_6);
+        map.addLayer(layer_CarpetasHomicidiodolosoenero_6);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/CarpetasHomicidiodolosoenero_6.png" /> Carpetas Homicidio doloso - enero': layer_CarpetasHomicidiodolosoenero_6,'<img src="legend/CarpetasHomicidioDolosooctdic_5.png" /> Carpetas Homicidio Doloso oct - dic': layer_CarpetasHomicidioDolosooctdic_5,'<img src="legend/Cluster_4.png" /> Cluster': layer_Cluster_4,'<img src="legend/Alcaldas_3.png" /> Alcaldías': layer_Alcaldas_3,'Carpetas por colonia<br /><table><tr><td style="text-align: center;"><img src="legend/Carpetasporcolonia_2_Sincarpetas0.png" /></td><td>Sin carpetas</td></tr><tr><td style="text-align: center;"><img src="legend/Carpetasporcolonia_2_011.png" /></td><td>0 - 1</td></tr><tr><td style="text-align: center;"><img src="legend/Carpetasporcolonia_2_122.png" /></td><td>1 - 2</td></tr><tr><td style="text-align: center;"><img src="legend/Carpetasporcolonia_2_233.png" /></td><td>2 - 3</td></tr><tr><td style="text-align: center;"><img src="legend/Carpetasporcolonia_2_344.png" /></td><td>3 - 4</td></tr></table>': layer_Carpetasporcolonia_2,"Positron": layer_Positron_1,"Google Road": layer_GoogleRoad_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
