@@ -1,1 +1,0 @@
-var json_UABC_10 = {"type":"FeatureCollection","name":"UABC_10","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"latitude":32.53389,"longitude":-116.96024,"label":null},"geometry":{"type":"Point","coordinates":[-116.960240025586529,32.533887918026458]}}]}
